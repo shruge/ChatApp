@@ -15,9 +15,8 @@ export const getToken = createAsyncThunk(
       setLocalAuthData(data)
 
       return data
-    }
-    catch ({ response = { statusText: 'networkError' } }) {
-      return rejectWithValue(response.statusText)
+    } catch ({ response }) {
+      return rejectWithValue(response.data.message || 'networkError')
     }
   },
 )
@@ -31,10 +30,8 @@ export const createUser = createAsyncThunk(
       setLocalAuthData(data)
 
       return data
-    }
-    catch ({ response = { statusText: 'networkError' } }) {
-      console.log(response.statusText)
-      return rejectWithValue(response.statusText)
+    } catch ({ response }) {
+      return rejectWithValue(response.data.message || 'networkError')
     }
   },
 )
